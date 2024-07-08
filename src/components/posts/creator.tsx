@@ -1,22 +1,25 @@
 import { useRef } from "react";
 import { createPost } from "../../services/post";
 import { useFormStatus } from "react-dom";
-import { User } from "@prisma/client";
 import { useAppContext } from "../../context";
+
+import cx from 'classnames';
 
 const CreateButton = () => {
   const { pending } = useFormStatus();
 
-  if (pending) return (
-    <p className="text-slate-600 text-center w-full font-semibold">Creating...</p>
-  );
+  const wrapperClasses = cx({
+    'w-full py-1 rounded font-semibold text-center': true,
+    'bg-blue-500 text-white': !pending,
+    'bg-slate-300 text-slate-600': pending,
+  });
 
   return (
     <button
-      className="w-full py-1 rounded bg-blue-500 text-white font-semibold text-center"
+      className={ wrapperClasses }
       disabled={ pending }
     >
-      Create
+      { pending ? 'Creating...' : 'Create' }
     </button>
   );
 }
@@ -48,7 +51,7 @@ const PostCreator = (props: Props) => {
       action={ f => handleCreateClick(f) }
     >
       <input
-        className=" text-slate-700 px-3 py-2 border bg-white w-full rounded-md"
+        className="text-slate-700 px-3 py-2 border bg-white w-full rounded-md focus:outline-none focus:border-slate-400"
         placeholder="Todo content"
         name="title"
         ref={ titleRef }
