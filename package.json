@@ -1,6 +1,6 @@
 {
   "name": "beryl-test",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "",
   "main": "/src/page.tsx",
   "scripts": {
@@ -39,8 +39,5 @@
     "tailwindcss": "^3.4.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
-  },
-  "eslint.options": {
-    "overrideConfigFile": "./.eslintrc.json"
   }
 }
