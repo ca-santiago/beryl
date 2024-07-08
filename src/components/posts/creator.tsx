@@ -1,8 +1,7 @@
-import { Session } from "@auth0/nextjs-auth0";
 import { useRef } from "react";
 import { createPost } from "../../services/post";
-import { getUserIdFromSession } from "../../helpers/session";
 import { useFormStatus } from "react-dom";
+import { User } from "@prisma/client";
 
 const CreateButton = () => {
   const { pending } = useFormStatus();
@@ -21,7 +20,15 @@ const CreateButton = () => {
   );
 }
 
-const PostCreator = ({ session }: { session: Session }) => {
+interface Props {
+  userData: User;
+}
+
+const PostCreator = (props: Props) => {
+  const {
+    userData,
+  } = props;
+
   const titleRef = useRef<HTMLInputElement>(null);
 
   const handleCreateClick = (form: FormData) => {
@@ -47,7 +54,7 @@ const PostCreator = ({ session }: { session: Session }) => {
         required
         type="text"
       />
-      <input type="hidden" name="userId" value={ getUserIdFromSession(session) } />
+      <input type="hidden" name="userId" value={ userData.id } />
       <div className="mt-2">
         <CreateButton />
       </div>

@@ -9,16 +9,24 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Post {
-  id      String  @id @default(cuid())
-  text    String
-  userId  String
+  id        String   @id @default(uuid())
+  text      String
+  userId    String
+  createdAt DateTime @default(now())
 
   @@index([id])
   @@index([userId])
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String
+  externalId String
+  createdAt  DateTime @default(now())
 }

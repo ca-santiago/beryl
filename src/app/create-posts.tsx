@@ -1,16 +1,20 @@
 'use client';
 
-import { Session } from "@auth0/nextjs-auth0";
 import PostCreator from "../components/posts/creator";
+import { User } from "@prisma/client";
 
 interface Props {
-  session: Session;
+  userData: User;
 };
 
-const CreatePosts = ({ session }: Props) => {
+const CreatePosts = (props: Props) => {
+  const {
+    userData,
+  } = props;
+
   return (
     <section className="mt-4">
-      <PostCreator session={ session } />
+      <PostCreator userData={ userData } />
     </section>
   );
 }

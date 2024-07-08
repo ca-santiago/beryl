@@ -1,18 +1,17 @@
 'use client'
 
-import { Post } from "../types";
+import { Post, User } from "../types";
 import PostCard from "../components/posts/card";
-import { Session } from "@auth0/nextjs-auth0";
 
 interface Props {
   posts: Array<Post>;
-  session: Session;
+  userData: User;
 };
 
 const PostsList = (props: Props) => {
   const {
     posts,
-    session,
+    userData,
   } = props;
 
   return (
@@ -21,7 +20,7 @@ const PostsList = (props: Props) => {
         <PostCard
           key={ p.id }
           data={ p }
-          session={ session }
+          userData={ userData }
         />
       ) }
     </div>
