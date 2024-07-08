@@ -1,7 +1,5 @@
 import { useFormStatus } from "react-dom";
-import { getUserIdFromSession } from "../../helpers/session";
 import { deletePostById } from "../../services/post";
-import { Session } from "@auth0/nextjs-auth0";
 import { User } from "@prisma/client";
 
 const DeleteButton = () => {

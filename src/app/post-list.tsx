@@ -5,7 +5,7 @@ import { useAppContext } from "../context";
 
 interface Props { };
 
-const PostsList = (props: Props) => {
+const PostsList = (_: Props) => {
   const { posts, auth } = useAppContext();
 
   if (posts.collection.length < 1) return null;

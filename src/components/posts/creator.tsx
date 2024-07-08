@@ -26,7 +26,7 @@ const CreateButton = () => {
 
 interface Props { };
 
-const PostCreator = (props: Props) => {
+const PostCreator = (_: Props) => {
   const {
     auth: {
       userData,

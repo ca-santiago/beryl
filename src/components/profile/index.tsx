@@ -4,7 +4,7 @@ import { useAppContext } from "../../context";
 
 interface Props { };
 
-const MiniProfileInfo = (props: Props) => {
+const MiniProfileInfo = (_: Props) => {
   const { auth } = useAppContext();
   const { user } = auth.session;
 
