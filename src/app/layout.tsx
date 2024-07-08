@@ -3,7 +3,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { Inter } from 'next/font/google';
 
-export const inter = Inter({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
