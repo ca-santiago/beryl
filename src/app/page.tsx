@@ -1,8 +1,9 @@
 import { getSession } from "@auth0/nextjs-auth0";
-import ProfileClient from "../components/profile";
+import MiniProfileInfo from "../components/profile";
 import { getAllPosts } from "../services/post";
 import CreatePosts from "./create-posts";
 import { getUserIdFromSession } from "../helpers/session";
+import PostsList from "./post-list";
 
 const Page = async () => {
   const session = await getSession();
@@ -17,13 +18,16 @@ const Page = async () => {
   return (
     <div className="min-h-screen bg-slate-100 min-w-full">
       <div className="mx-auto max-w-[400px]">
-        <h1 className="font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
+        <h1 className="pt-4 font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
         <CreatePosts
-          posts={ posts }
+          session={ plainSession }
+        />
+        <PostsList
+          posts={ posts } 
           session={ plainSession }
         />
         <section className="mt-3">
-          <ProfileClient
+          <MiniProfileInfo
             session={ plainSession }
           />
         </section>

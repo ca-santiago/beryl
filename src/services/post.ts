@@ -35,8 +35,25 @@ const getAllPosts = async ({ userId }: {userId: string}) => {
   });
 }
 
+interface PostContentUpdateArgs {
+  postId: string;
+  text: string;
+}
+
+const updatePostContent = async (content: PostContentUpdateArgs) =>  {
+  await prisma.post.update({
+    where: {
+      id: content.postId,
+    },
+    data: {
+      text: content.text,
+    },
+  });
+}
+
 export {
   createPost,
   deletePostById,
   getAllPosts,
+  updatePostContent,
 };

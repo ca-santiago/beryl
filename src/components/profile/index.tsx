@@ -6,23 +6,28 @@ interface Props {
   session: Session;
 };
 
-const ProfileClient = ({ session }: Props) => {
-  const user = session.user;
+const MiniProfileInfo = (props: Props) => {
+  const {
+    session: {
+      user,
+    },
+  } = props;
 
   return (
-    <div className="flex gap-2 mt-3">
-      <div>
-        <div className='flex gap-2'>
-          <img src={user.picture} alt={user.name} />
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
+    <div className="flex gap-2 mt-4 flex-col">
+      <div className='flex justify-between'>
+        <div className="flex gap-2 items-center">
+          <img
+            className="rounded-full w-7 h-7"
+            src={ user.picture }
+            alt={ user.name }
+          />
+          <p>{ user.name }</p>
         </div>
-        <div className='mt-2'>
-          <a className="px-2 py-1 rounded-lg bg-red-500 text-white" href="/api/auth/logout">Logout</a>
-        </div>
+        <a className="px-2 py-1 rounded-lg bg-red-500 text-white" href="/api/auth/logout">Logout</a>
       </div>
     </div>
   );
 }
 
-export default ProfileClient;
+export default MiniProfileInfo;
