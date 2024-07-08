@@ -15,7 +15,7 @@ const Page = async () => {
   const plainSession = { ...session };
 
   return (
-    <div className="min-h-screen bg-slate-50 min-w-full">
+    <div className="min-h-screen bg-slate-100 min-w-full">
       <div className="mx-auto max-w-[400px]">
         <h1 className="font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
         <CreatePosts

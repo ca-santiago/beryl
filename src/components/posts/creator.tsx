@@ -8,12 +8,12 @@ const CreateButton = () => {
   const { pending } = useFormStatus();
 
   if (pending) return (
-    <p className="text-slate-600 text-center w-full font-semibold">Creating</p>
+    <p className="text-slate-600 text-center w-full font-semibold">Creating...</p>
   );
 
   return (
     <button
-      className="w-full rounded bg-blue-500 text-white font-semibold text-center"
+      className="w-full py-1 rounded bg-blue-500 text-white font-semibold text-center"
       disabled={ pending }
     >
       Create
@@ -35,11 +35,22 @@ const PostCreator = ({ session }: { session: Session }) => {
   }
 
   return (
-    <form action={ f => handleCreateClick(f) }>
-      <label htmlFor="title">Title</label>
-      <input ref={ titleRef } type="text" name="title" required />
+    <form 
+      className="mt-2"
+      action={ f => handleCreateClick(f) }
+    >
+      <input
+        className=" text-slate-700 px-3 py-2 border bg-white w-full rounded-md"
+        placeholder="Todo content"
+        name="title"
+        ref={ titleRef }
+        required
+        type="text"
+      />
       <input type="hidden" name="userId" value={ getUserIdFromSession(session) } />
-      <CreateButton />
+      <div className="mt-2">
+        <CreateButton />
+      </div>
     </form>
   );
 }
