@@ -1,9 +1,9 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
-import { getPrismaClient } from ".";
+import { prismaClient } from ".";
 
-const prisma = getPrismaClient();
+const prisma = prismaClient;
 
 const createPost = async (form: FormData) => {
   const title = form.get('title') as string;

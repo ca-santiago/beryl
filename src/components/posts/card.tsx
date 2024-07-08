@@ -8,10 +8,11 @@ const DeleteButton = () => {
   if (pending) return '...';
 
   return (
-    <div className=" px-2 py-1 rounded bg-red-500 text-white">
+    <div>
       <button
+        className="bg-red-500 text-white px-2 py-1 rounded"
+        disabled={ pending }
         type="submit"
-        disabled={pending}
       >
         Delete
       </button>

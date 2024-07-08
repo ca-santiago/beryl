@@ -1,22 +1,26 @@
 import { PrismaClient } from "@prisma/client";
 
-let prismaClient: PrismaClient;
-
-const startPrismaClient = () => {
-  if (prismaClient) return;
-  prismaClient = new PrismaClient();
-  return prismaClient;
+declare global {
+  // Prevent multiple instances of Prisma Client in development
+  var prismaClient: PrismaClient | undefined;
 }
 
-const getPrismaClient = (): PrismaClient => {
-  if (prismaClient) return prismaClient;
-  return startPrismaClient();
+export const prismaClient = global.prismaClient || new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
+
+if (process.env.NODE_ENV !== 'production') global.prismaClient = prismaClient;
+
+if (process.env.NODE_ENV !== 'production') {
+  global.prisma = prismaClient;
+
+  process.once('SIGUSR2', async () => {
+    await prismaClient.$disconnect();
+    process.kill(process.pid, 'SIGUSR2');
+  });
+
+  process.on('SIGINT', async () => {
+    await prismaClient.$disconnect();
+    process.exit(0);
+  });
 }
-
-startPrismaClient();
-
-export {
-  getPrismaClient,
-  prismaClient,
-  startPrismaClient,
-};
