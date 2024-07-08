@@ -5,3 +5,7 @@
 .with-list-div>:nth-child(n):not(:last-child) {
   @apply border-slate-200 border-b pb-2;
 }
+
+.font-inter {
+  font-family: var(--font-inter);
+}

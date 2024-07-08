@@ -31,7 +31,7 @@ const Page = async () => {
     >
       <div className="min-h-screen bg-slate-100 min-w-full">
         <div className="mx-auto max-w-[400px]">
-          <h1 className="pt-4 font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
+          <h1 className="pt-4 font-semibold text-slate-700 text-2xl text-center font-inter">Testing server actions</h1>
           <CreatePosts />
           <PostsList />
           <section className="mt-4">
