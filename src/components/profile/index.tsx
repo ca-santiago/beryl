@@ -1,17 +1,12 @@
 'use client';
 
-import { Session } from "@auth0/nextjs-auth0";
+import { useAppContext } from "../../context";
 
-interface Props {
-  session: Session;
-};
+interface Props { };
 
 const MiniProfileInfo = (props: Props) => {
-  const {
-    session: {
-      user,
-    },
-  } = props;
+  const { auth } = useAppContext();
+  const { user } = auth.session;
 
   return (
     <div className="flex gap-2 mt-4 flex-col">

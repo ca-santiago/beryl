@@ -5,6 +5,8 @@ import CreatePosts from "./create-posts";
 import { getUserIdFromSession } from "../helpers/session";
 import PostsList from "./post-list";
 import { UserService } from "../services/user";
+import { AppContextProvider } from "../context/provider";
+import { AuthInfo } from "../types";
 
 const Page = async () => {
   const session = await getSession();
@@ -20,27 +22,27 @@ const Page = async () => {
 
   const plainSession = { ...session };
 
+  const authInfo: AuthInfo = { session: plainSession, userData };
+
   return (
-    <div className="min-h-screen bg-slate-100 min-w-full">
-      <div className="mx-auto max-w-[400px]">
-        <h1 className="pt-4 font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
-        <CreatePosts
-          userData={ userData }
-        />
-        <PostsList
-          posts={ posts } 
-          userData={ userData }
-        />
-        <section className="mt-4">
-          <MiniProfileInfo
-            session={ plainSession }
-          />
-          <pre className="mt-4">
+    <AppContextProvider
+      auth={ authInfo }
+      posts={ posts }
+    >
+      <div className="min-h-screen bg-slate-100 min-w-full">
+        <div className="mx-auto max-w-[400px]">
+          <h1 className="pt-4 font-semibold text-slate-700 text-2xl text-center">Testing server actions</h1>
+          <CreatePosts />
+          <PostsList />
+          <section className="mt-4">
+            <MiniProfileInfo />
+            <pre className="mt-4">
             { JSON.stringify(userData, null, 2) }
-          </pre>
-        </section>
+            </pre>
+          </section>
+        </div>
       </div>
-    </div>
+    </AppContextProvider>
   );
 }
 

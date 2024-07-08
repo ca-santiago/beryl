@@ -1,20 +1,15 @@
 'use client';
 
 import PostCreator from "../components/posts/creator";
-import { User } from "@prisma/client";
+import { useAppContext } from "../context";
 
-interface Props {
-  userData: User;
-};
+interface Props { };
 
 const CreatePosts = (props: Props) => {
-  const {
-    userData,
-  } = props;
 
   return (
     <section className="mt-4">
-      <PostCreator userData={ userData } />
+      <PostCreator />
     </section>
   );
 }

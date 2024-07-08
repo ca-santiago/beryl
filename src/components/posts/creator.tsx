@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { createPost } from "../../services/post";
 import { useFormStatus } from "react-dom";
 import { User } from "@prisma/client";
+import { useAppContext } from "../../context";
 
 const CreateButton = () => {
   const { pending } = useFormStatus();
@@ -20,14 +21,14 @@ const CreateButton = () => {
   );
 }
 
-interface Props {
-  userData: User;
-}
+interface Props { };
 
 const PostCreator = (props: Props) => {
   const {
-    userData,
-  } = props;
+    auth: {
+      userData,
+    }
+  } = useAppContext();
 
   const titleRef = useRef<HTMLInputElement>(null);
 
