@@ -17,7 +17,7 @@ const DeleteButton = () => {
 
   return (
     <button
-      className="p-1 rounded"
+      className="p-1 rounded h-fit"
       disabled={ pending }
       type="submit"
     >
