@@ -5,6 +5,8 @@ import { Post, User } from "@prisma/client";
 import { FaTrash } from "react-icons/fa6";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+import moment from 'moment';
+
 const DeleteButton = () => {
   const { pending } = useFormStatus();
   if (pending) return (
@@ -32,13 +34,14 @@ interface PostFromProps {
 const PostCard = ({ data, userData }: PostFromProps) => {
   return (
     <form
-      className="flex flex-row gap-2 justify-between"
+      className="flex flex-row gap-2 justify-between font-inter"
       action={ deletePostById }
     >
       <input type="hidden" name='id' value={ data.id } />
       <input type="hidden" name='userId' value={ userData.id } />
       <div className="mx-1 my-1 text-slate-600">
-        <p className="text-base">{ data.text }</p>
+        <p className="text-base font-medium text-slate-500">{ data.text }</p>
+        <p className="text-slate-400 text-xs mt-1">{ moment(data.createdAt).fromNow() }</p>
       </div>
       <DeleteButton />
     </form>
