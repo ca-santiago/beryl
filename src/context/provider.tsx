@@ -1,8 +1,9 @@
 'use client'
 
-import { PropsWithChildren } from "react";
-import { AppContext } from ".";
+import React, { PropsWithChildren } from "react";
 import { AuthInfo, Post, RootAppContext } from "../types";
+
+export const AppContext = React.createContext<RootAppContext>(undefined);
 
 interface AppContextProviderProps {
   auth: AuthInfo;

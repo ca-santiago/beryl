@@ -5,7 +5,7 @@ import CreatePosts from "./create-posts";
 import { getUserIdFromSession } from "../helpers/session";
 import PostsList from "./post-list";
 import { UserService } from "../services/user";
-import { AppContextProvider } from "../context/provider";
+import { AppContextProvider } from "../context";
 import { AuthInfo } from "../types";
 
 const Page = async () => {
