@@ -29,4 +29,32 @@ model User {
   email      String
   externalId String
   createdAt  DateTime @default(now())
+
+  @@unique([externalId])
+}
+
+model SellerAccount {
+  id        String    @id @default(uuid())
+  userId    String
+  storeName String
+  Product   Product[]
+  verified  Boolean
+  createdAt DateTime  @default(now())
+
+  @@index([id, userId])
+  @@index([userId])
+  @@unique([userId])
+}
+
+model Product {
+  id        String        @id @default(uuid())
+  title     String
+  price     Float
+  currency  String
+  sellerId  String
+  seller    SellerAccount @relation(fields: [sellerId], references: [id])
+  createdAt String
+  media     String
+
+  @@index([sellerId])
 }

@@ -4,10 +4,10 @@ import { prismaClient } from ".";
 const prisma = prismaClient;
 
 const getUserData = async (userId: string) => {
-  return await prisma.user.findFirst({
+  return await prisma.user.findUnique({
     where: {
-      externalId: { equals: userId },
-    },
+      externalId: userId,
+    }
   });
 }
 
