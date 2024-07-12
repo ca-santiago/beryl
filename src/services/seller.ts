@@ -1,6 +1,7 @@
 'use server'
 
 import { redirect } from "next/navigation";
+import { prismaClient  } from ".";
 
 const requestSellerAccount = async (form: FormData) => {
   const storeName = form.get('storeName') as string;
