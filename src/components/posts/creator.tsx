@@ -1,9 +1,11 @@
+'use client'
+
 import { useRef } from "react";
 import { createPost } from "../../services/post";
 import { useFormStatus } from "react-dom";
-import { useAppContext } from "../../context";
 
 import cx from 'classnames';
+import { useAppSelector } from "../../context/store";
 
 const CreateButton = () => {
   const { pending } = useFormStatus();
@@ -27,11 +29,7 @@ const CreateButton = () => {
 interface Props { };
 
 const PostCreator = (_: Props) => {
-  const {
-    auth: {
-      userData,
-    }
-  } = useAppContext();
+  const userId = useAppSelector(s => s.session.userData.id);
 
   const titleRef = useRef<HTMLInputElement>(null);
 
@@ -58,7 +56,7 @@ const PostCreator = (_: Props) => {
         required
         type="text"
       />
-      <input type="hidden" name="userId" value={ userData.id } />
+      <input type="hidden" name="userId" value={ userId } />
       <div className="mt-2">
         <CreateButton />
       </div>

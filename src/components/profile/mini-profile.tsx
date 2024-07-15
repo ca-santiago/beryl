@@ -1,11 +1,9 @@
-'use client';
-import { useAppContext } from "../../context";
+import { useAppSelector } from "../../context/store";
 
 interface Props { };
 
 const MiniProfileInfo = (_: Props) => {
-  const { auth } = useAppContext();
-  const { user } = auth.session;
+  const { user } = useAppSelector(s => s.session.session);
 
   return (
     <div className="flex gap-2 flex-col">

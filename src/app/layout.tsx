@@ -1,3 +1,5 @@
+'use client'
+
 import { PropsWithChildren } from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
@@ -14,7 +16,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={ inter.variable } >
        <UserProvider>
-        <body>{children}</body>
+        <body>{ children }</body>
       </UserProvider>
     </html>
   )

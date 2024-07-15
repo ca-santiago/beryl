@@ -15,6 +15,6 @@ export const getUserSession = async () => {
 
   return {
     userData,
-    session,
+    session: { ...session },
   };
 }

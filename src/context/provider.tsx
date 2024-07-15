@@ -1,28 +1,35 @@
 'use client'
 
-import React, { PropsWithChildren } from "react";
-import { AuthInfo, Post, RootAppContext } from "../types";
+import React, { PropsWithChildren, useRef } from "react";
+import { PostsState, ProviderPropsWithSession, SessionState } from "../types";
+import { Provider } from "react-redux";
+import { AppStore, makeStore } from "./store";
 
-export const AppContext = React.createContext<RootAppContext>(undefined);
+interface AppProviderProps {
+  session: SessionState,
+  posts: PostsState,
+};
 
-interface AppContextProviderProps {
-  auth: AuthInfo;
-  posts: Array<Post>;
-}
+const AppProvider = (props: PropsWithChildren<AppProviderProps>) => {
+  'use client'
+  const storeRef = useRef<AppStore>();
 
-export const AppContextProvider = (props: PropsWithChildren<AppContextProviderProps>) => {
-  const initialContext: RootAppContext = {
-    auth: props.auth,
-    posts: {
-      collection: props.posts
-    },
+  if (!storeRef.current) {
+    storeRef.current = makeStore({
+      posts: props.posts,
+      session: props.session,
+    });
+  }
+
+  return <Provider store={ storeRef.current }>{ props.children }</Provider>
+};
+
+export default AppProvider;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getDefaultSessionFromProviderProps = (props: ProviderPropsWithSession<any>): SessionState => {
+  return {
+    session: props.session,
+    userData: props.userData,
   };
-
-  return (
-    <AppContext.Provider
-      value={ initialContext } 
-    >
-      { props.children }
-    </AppContext.Provider>
-  );
 }
