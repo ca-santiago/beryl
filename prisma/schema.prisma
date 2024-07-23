@@ -41,9 +41,9 @@ model SellerAccount {
   verified  Boolean
   createdAt DateTime  @default(now())
 
+  @@unique([userId])
   @@index([id, userId])
   @@index([userId])
-  @@unique([userId])
 }
 
 model Product {
@@ -53,7 +53,7 @@ model Product {
   currency  String
   sellerId  String
   seller    SellerAccount @relation(fields: [sellerId], references: [id])
-  createdAt String
+  createdAt DateTime      @default(now())
   media     String
 
   @@index([sellerId])

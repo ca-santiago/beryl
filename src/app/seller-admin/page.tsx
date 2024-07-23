@@ -2,6 +2,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { getSellerAccountInfoByUserId } from "../../services/seller";
 import { getUserSession } from "../../services/session";
 import { SellerPageProvider } from "../../context/provider";
+import { getSellerProducts } from "../../services/product";
 
 const SellerPage = async () => {
   const {
@@ -10,12 +11,13 @@ const SellerPage = async () => {
   } = await getUserSession();
 
   const sellerAccountData = await getSellerAccountInfoByUserId(userData.id);
+  const products = await getSellerProducts(userData.id);
 
   if (!sellerAccountData) return redirect('/request-seller-account', RedirectType.push);
 
   return (
     <SellerPageProvider
-      products={ [] }
+      products={ products }
       session={ session }
       userData={ userData }
     >
