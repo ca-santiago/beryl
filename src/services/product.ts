@@ -28,8 +28,10 @@ const createProduct = async ({
       price,
     }
   });
+  return prod;
 }
 
 export {
   getSellerProducts,
+  createProduct,
 }
